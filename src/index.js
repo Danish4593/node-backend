@@ -2,7 +2,19 @@ import mongoose from "mongoose";
 // import { DB_NAME } from "./constants.js";
 import connectDB from "./db/index.js"
 
-connectDB();
+// connectDB();
+
+connectDB().then(() => {
+    app.on("error", (error) => {
+        console.log("ERROR", error)
+        throw err
+    })
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Serve is running at ${process.env.PORT}`);
+    })
+}).catch((error) => {
+    console.log('MONGO DB connection failed !!!', error);
+})
 
 /*
 import express from "express";
